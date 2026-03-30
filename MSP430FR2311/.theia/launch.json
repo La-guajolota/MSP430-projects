@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "2bitCounter_leds",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "2bitCounter_leds",
+                "resourceId": "/2bitCounter_leds"
+            }
+        },
+        {
+            "name": "PWM_DACs",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "PWM_DACs",
+                "resourceId": "/PWM_DACs"
+            }
+        },
+        {
+            "name": "AS5048B_I2C_encoder.c",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "AS5048B_I2C_encoder.c",
+                "resourceId": "/AS5048B_I2C_encoder.c"
+            }
+        }
+    ]
+}

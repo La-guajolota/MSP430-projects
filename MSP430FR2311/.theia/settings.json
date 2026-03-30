@@ -1,0 +1,5 @@
+{
+    "CCS.debug.watch.showAddress": true,
+    "CCS.debug.watch.showType": true,
+    "CCS.debug.serial.options.localEcho": false
+}

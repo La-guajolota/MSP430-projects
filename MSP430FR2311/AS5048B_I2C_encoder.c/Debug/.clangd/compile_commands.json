@@ -1,0 +1,17 @@
+[
+   {
+      "directory" : "/run/media/adrian/sd_linux/embebidos/MCUs/MSP430FR2311/AS5048B_I2C_encoder.c/Debug",
+      "command"   : "clang++ -I\"/home/adrian/ti/ccs2041/ccs/ccs_base/msp430/include\" -I\"/run/media/adrian/sd_linux/embebidos/MCUs/MSP430FR2311/AS5048B_I2C_encoder.c\" -I\"/home/adrian/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR2311__ -xc",
+      "file"      : "/run/media/adrian/sd_linux/embebidos/MCUs/MSP430FR2311/AS5048B_I2C_encoder.c/src/main.c"
+   },
+   {
+      "directory" : "/run/media/adrian/sd_linux/embebidos/MCUs/MSP430FR2311/AS5048B_I2C_encoder.c/Debug",
+      "command"   : "clang++ -I\"/home/adrian/ti/ccs2041/ccs/ccs_base/msp430/include\" -I\"/run/media/adrian/sd_linux/embebidos/MCUs/MSP430FR2311/AS5048B_I2C_encoder.c\" -I\"/home/adrian/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR2311__ -xc",
+      "file"      : "/run/media/adrian/sd_linux/embebidos/MCUs/MSP430FR2311/AS5048B_I2C_encoder.c/src/AS5048B.c"
+   },
+   {
+      "directory" : "/run/media/adrian/sd_linux/embebidos/MCUs/MSP430FR2311/AS5048B_I2C_encoder.c/Debug",
+      "command"   : "clang++ -I\"/home/adrian/ti/ccs2041/ccs/ccs_base/msp430/include\" -I\"/run/media/adrian/sd_linux/embebidos/MCUs/MSP430FR2311/AS5048B_I2C_encoder.c\" -I\"/home/adrian/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR2311__ -xc",
+      "file"      : "/run/media/adrian/sd_linux/embebidos/MCUs/MSP430FR2311/AS5048B_I2C_encoder.c/src/eUSCIB_I2C.c"
+   }
+]
