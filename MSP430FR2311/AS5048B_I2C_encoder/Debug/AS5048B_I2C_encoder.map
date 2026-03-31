@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker Unix v21.6.1                   
 ******************************************************************************
->> Linked Mon Mar 30 23:43:45 2026
+>> Linked Tue Mar 31 15:25:13 2026
 
 OUTPUT FILE NAME:   <AS5048B_I2C_encoder.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000f6b6
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000f6c2
 
 
 MEMORY CONFIGURATION
@@ -13,7 +13,7 @@ MEMORY CONFIGURATION
 ----------------------  --------  ---------  --------  --------  ----  --------
   BSL0                  00001000   00000800  00000000  00000800  RWIX
   RAM                   00002000   00000400  000000de  00000322  RWIX
-  FRAM                  0000f100   00000e80  000005da  000008a6  RWIX
+  FRAM                  0000f100   00000e80  000005e6  0000089a  RWIX
   JTAGSIGNATURE         0000ff80   00000004  00000004  00000000  RWIX  ffff 
   BSLSIGNATURE          0000ff84   00000004  00000004  00000000  RWIX  ffff 
   INT00                 0000ff88   00000002  00000000  00000002  RWIX
@@ -107,35 +107,35 @@ section   page    origin      length       input sections
 
 .const     0    0000f112    00000000     UNINITIALIZED
 
-.text      0    0000f112    0000049a     
+.text      0    0000f112    000004a6     
                   0000f112    0000007e     main.obj (.text:main)
                   0000f190    00000072     AS5048B.obj (.text:AS5048B_SetZeroPosition)
-                  0000f202    0000006c     eUSCIB_I2C.obj (.text:I2C_Master_WriteReg)
-                  0000f26e    0000006c     eUSCIB_I2C.obj (.text:I2C_port_init)
-                  0000f2da    0000006a     rts430x_lc_sd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
-                  0000f344    0000005e     AS5048B.obj (.text:AS5048B_GetAngle16bit)
-                  0000f3a2    00000052     eUSCIB_I2C.obj (.text:I2C_Master_ReadReg)
-                  0000f3f4    00000042     AS5048B.obj (.text:AS5048B_AddDevice)
-                  0000f436    00000042     eUSCIB_I2C.obj (.text:I2C_Master_IsSlaveAvailable)
-                  0000f478    0000003e     rts430x_lc_sd_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  0000f4b6    0000003c     utils.obj (.text:initClockTo16MHz)
-                  0000f4f2    00000030     eUSCIA_uart.obj (.text:uart_init)
-                  0000f522    0000001a     AS5048B.obj (.text:AS5048B_Init)
-                  0000f53c    00000014     rts430x_lc_sd_eabi.lib : memset.c.obj (.text:memset)
-                  0000f550    00000014                            : mult16.asm.obj (.text)
-                  0000f564    00000014     AS5048B.obj (.text:user_i2c_write)
-                  0000f578    00000012     rts430x_lc_sd_eabi.lib : memcpy.c.obj (.text:memcpy)
-                  0000f58a    0000000e     eUSCIA_uart.obj (.text:TXuart_send)
-                  0000f598    00000008     AS5048B.obj (.text:user_i2c_read)
-                  0000f5a0    00000006     rts430x_lc_sd_eabi.lib : exit.c.obj (.text:abort)
-                  0000f5a6    00000004                            : pre_init.c.obj (.text:_system_pre_init)
-                  0000f5aa    00000002                            : startup.c.obj (.text:_system_post_cinit)
+                  0000f202    00000072     eUSCIB_I2C.obj (.text:I2C_Master_WriteReg)
+                  0000f274    0000006c     eUSCIB_I2C.obj (.text:I2C_port_init)
+                  0000f2e0    0000006a     rts430x_lc_sd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
+                  0000f34a    0000005e     AS5048B.obj (.text:AS5048B_GetAngle16bit)
+                  0000f3a8    00000058     eUSCIB_I2C.obj (.text:I2C_Master_ReadReg)
+                  0000f400    00000042     AS5048B.obj (.text:AS5048B_AddDevice)
+                  0000f442    00000042     eUSCIB_I2C.obj (.text:I2C_Master_IsSlaveAvailable)
+                  0000f484    0000003e     rts430x_lc_sd_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  0000f4c2    0000003c     utils.obj (.text:initClockTo16MHz)
+                  0000f4fe    00000030     eUSCIA_uart.obj (.text:uart_init)
+                  0000f52e    0000001a     AS5048B.obj (.text:AS5048B_Init)
+                  0000f548    00000014     rts430x_lc_sd_eabi.lib : memset.c.obj (.text:memset)
+                  0000f55c    00000014                            : mult16.asm.obj (.text)
+                  0000f570    00000014     AS5048B.obj (.text:user_i2c_write)
+                  0000f584    00000012     rts430x_lc_sd_eabi.lib : memcpy.c.obj (.text:memcpy)
+                  0000f596    0000000e     eUSCIA_uart.obj (.text:TXuart_send)
+                  0000f5a4    00000008     AS5048B.obj (.text:user_i2c_read)
+                  0000f5ac    00000006     rts430x_lc_sd_eabi.lib : exit.c.obj (.text:abort)
+                  0000f5b2    00000004                            : pre_init.c.obj (.text:_system_pre_init)
+                  0000f5b6    00000002                            : startup.c.obj (.text:_system_post_cinit)
 
 .text:_isr 
-*          0    0000f5ac    0000012e     
-                  0000f5ac    0000010a     main.obj (.text:_isr:USCI_B0_ISR)
-                  0000f6b6    0000001c     rts430x_lc_sd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noargs)
-                  0000f6d2    00000008                            : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+*          0    0000f5b8    0000012e     
+                  0000f5b8    0000010a     main.obj (.text:_isr:USCI_B0_ISR)
+                  0000f6c2    0000001c     rts430x_lc_sd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noargs)
+                  0000f6de    00000008                            : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
 .bss       0    00002000    0000003e     UNINITIALIZED
                   00002000    00000030     (.common:I2C_comm)
@@ -206,12 +206,12 @@ MODULE SUMMARY
        ------                 ----   -------   -------
     ./src/
        main.obj               392    2         62     
-       eUSCIB_I2C.obj         364    0         0      
+       eUSCIB_I2C.obj         376    0         0      
        AS5048B.obj            328    0         0      
        eUSCIA_uart.obj        62     0         0      
        utils.obj              60     0         0      
     +--+----------------------+------+---------+---------+
-       Total:                 1206   2         62     
+       Total:                 1218   2         62     
                                                       
     /home/adrian/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/lib/rts430x_lc_sd_eabi.lib
        autoinit.c.obj         106    0         0      
@@ -243,7 +243,7 @@ MODULE SUMMARY
        Stack:                 0      0         160    
        Linker Generated:      0      18        0      
     +--+----------------------+------+---------+---------+
-       Grand Total:           1480   48        222    
+       Grand Total:           1492   48        222    
 
 
 LINKER GENERATED COPY TABLES
@@ -292,9 +292,9 @@ address   name
 00000712  ADCMEM0                                
 00000713  ADCMEM0_H                              
 00000712  ADCMEM0_L                              
-0000f3f4  AS5048B_AddDevice                      
-0000f344  AS5048B_GetAngle16bit                  
-0000f522  AS5048B_Init                           
+0000f400  AS5048B_AddDevice                      
+0000f34a  AS5048B_GetAngle16bit                  
+0000f52e  AS5048B_Init                           
 0000f190  AS5048B_SetZeroPosition                
 00000660  BAKMEM0                                
 00000661  BAKMEM0_H                              
@@ -344,7 +344,7 @@ address   name
 00000672  BAKMEM9                                
 00000673  BAKMEM9_H                              
 00000672  BAKMEM9_L                              
-0000f5a0  C$$EXIT                                
+0000f5ac  C$$EXIT                                
 000002ee  CAPTIOCTL                              
 000002ef  CAPTIOCTL_H                            
 000002ee  CAPTIOCTL_L                            
@@ -414,11 +414,11 @@ address   name
 000001a6  GCCTL1                                 
 000001a7  GCCTL1_H                               
 000001a6  GCCTL1_L                               
-0000f436  I2C_Master_IsSlaveAvailable            
-0000f3a2  I2C_Master_ReadReg                     
+0000f442  I2C_Master_IsSlaveAvailable            
+0000f3a8  I2C_Master_ReadReg                     
 0000f202  I2C_Master_WriteReg                    
 00002000  I2C_comm                               
-0000f26e  I2C_port_init                          
+0000f274  I2C_port_init                          
 00000204  P1DIR                                  
 0000021a  P1IE                                   
 00000218  P1IES                                  
@@ -634,7 +634,7 @@ address   name
 00000f00  TRI0CTL                                
 00000f01  TRI0CTL_H                              
 00000f00  TRI0CTL_L                              
-0000f58a  TXuart_send                            
+0000f596  TXuart_send                            
 00000510  UCA0ABCTL                              
 00000511  UCA0ABCTL_H                            
 00000510  UCA0ABCTL_L                            
@@ -722,7 +722,7 @@ address   name
 0000054e  UCB0TXBUF                              
 0000054f  UCB0TXBUF_H                            
 0000054e  UCB0TXBUF_L                            
-0000f5ac  USCI_B0_ISR                            
+0000f5b8  USCI_B0_ISR                            
 000001cc  WDTCTL                                 
 000001cd  WDTCTL_H                               
 000001cc  WDTCTL_L                               
@@ -733,8 +733,8 @@ address   name
 0000f112  __TI_CINIT_Warm                        
 0000f106  __TI_Handler_Table_Base                
 0000f10a  __TI_Handler_Table_Limit               
-0000f6d2  __TI_ISR_TRAP                          
-0000f2da  __TI_auto_init_nobinit_nopinit_hold_wdt
+0000f6de  __TI_ISR_TRAP                          
+0000f2e0  __TI_auto_init_nobinit_nopinit_hold_wdt
 0000ffe2  __TI_int45                             
 0000ffe4  __TI_int46                             
 0000ffe6  __TI_int47                             
@@ -752,22 +752,22 @@ address   name
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
-0000f478  __TI_zero_init_nomemset                
+0000f484  __TI_zero_init_nomemset                
 ffffffff  __c_args__                             
-0000f550  __mspabi_mpyi                          
-0000f550  __mspabi_mpyi_sw                       
-0000f6b6  _c_int00_noargs                        
+0000f55c  __mspabi_mpyi                          
+0000f55c  __mspabi_mpyi_sw                       
+0000f6c2  _c_int00_noargs                        
 0000fffe  _reset_vector                          
 00002360  _stack                                 
-0000f5aa  _system_post_cinit                     
-0000f5a6  _system_pre_init                       
-0000f5a0  abort                                  
+0000f5b6  _system_post_cinit                     
+0000f5b2  _system_pre_init                       
+0000f5ac  abort                                  
 00002030  encoder                                
-0000f4b6  initClockTo16MHz                       
+0000f4c2  initClockTo16MHz                       
 0000f112  main                                   
-0000f578  memcpy                                 
-0000f53c  memset                                 
-0000f4f2  uart_init                              
+0000f584  memcpy                                 
+0000f548  memset                                 
+0000f4fe  uart_init                              
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -1239,28 +1239,28 @@ address   name
 0000f112  main                                   
 0000f190  AS5048B_SetZeroPosition                
 0000f202  I2C_Master_WriteReg                    
-0000f26e  I2C_port_init                          
-0000f2da  __TI_auto_init_nobinit_nopinit_hold_wdt
-0000f344  AS5048B_GetAngle16bit                  
-0000f3a2  I2C_Master_ReadReg                     
-0000f3f4  AS5048B_AddDevice                      
-0000f436  I2C_Master_IsSlaveAvailable            
-0000f478  __TI_zero_init_nomemset                
-0000f4b6  initClockTo16MHz                       
-0000f4f2  uart_init                              
-0000f522  AS5048B_Init                           
-0000f53c  memset                                 
-0000f550  __mspabi_mpyi                          
-0000f550  __mspabi_mpyi_sw                       
-0000f578  memcpy                                 
-0000f58a  TXuart_send                            
-0000f5a0  C$$EXIT                                
-0000f5a0  abort                                  
-0000f5a6  _system_pre_init                       
-0000f5aa  _system_post_cinit                     
-0000f5ac  USCI_B0_ISR                            
-0000f6b6  _c_int00_noargs                        
-0000f6d2  __TI_ISR_TRAP                          
+0000f274  I2C_port_init                          
+0000f2e0  __TI_auto_init_nobinit_nopinit_hold_wdt
+0000f34a  AS5048B_GetAngle16bit                  
+0000f3a8  I2C_Master_ReadReg                     
+0000f400  AS5048B_AddDevice                      
+0000f442  I2C_Master_IsSlaveAvailable            
+0000f484  __TI_zero_init_nomemset                
+0000f4c2  initClockTo16MHz                       
+0000f4fe  uart_init                              
+0000f52e  AS5048B_Init                           
+0000f548  memset                                 
+0000f55c  __mspabi_mpyi                          
+0000f55c  __mspabi_mpyi_sw                       
+0000f584  memcpy                                 
+0000f596  TXuart_send                            
+0000f5ac  C$$EXIT                                
+0000f5ac  abort                                  
+0000f5b2  _system_pre_init                       
+0000f5b6  _system_post_cinit                     
+0000f5b8  USCI_B0_ISR                            
+0000f6c2  _c_int00_noargs                        
+0000f6de  __TI_ISR_TRAP                          
 0000ffe2  __TI_int45                             
 0000ffe4  __TI_int46                             
 0000ffe6  __TI_int47                             

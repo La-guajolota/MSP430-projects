@@ -1,12 +1,27 @@
-// /**
-//  * AS5048B Magnetic Position Sensor Driver Implementation
-//  *
-//  * This file contains the implementation of the driver functions
-//  * for the AS5048B magnetic position sensor using I2C communication.
-//  */
+/**
+ * @file AS5048B.c
+ * @brief AS5048B Magnetic Position Sensor Driver Implementation.
+ * This file contains the implementation of the driver functions for the AS5048B 
+ * magnetic position sensor utilizing I2C communication. Hardware constraints and 
+ * 14-bit register masking are enforced per the manufacturer's specification.
+ * @reference AMS OSRAM AS5048B Datasheet, Revision 1.3.
+ * @author Adrián Silva Palafox
+ * @date may 31 2026
+ */
+
 #include "./include/AS5048B.h"
 
 /* Private I2C helpers ------------------------------------------------------*/
+
+/**
+ * @internal
+ * @brief Executes a hardware-abstracted I2C read transaction.
+ * * @param drv Pointer to the AS5048B driver instance.
+ * @param dev_id 7-bit I2C slave address of the target sensor.
+ * @param reg_addr Internal register address to read from.
+ * @param len Number of sequential bytes to read.
+ * @return I2C_Mode_t Status of the I2C transaction (IDLE_MODE on success).
+ */
 static I2C_Mode_t user_i2c_read(AS5048B_Driver_t *drv,
                                 uint8_t dev_id,
                                 uint8_t reg_addr,
@@ -15,6 +30,16 @@ static I2C_Mode_t user_i2c_read(AS5048B_Driver_t *drv,
     return I2C_Master_ReadReg(drv->I2Cport, dev_id, reg_addr, len);
 }
 
+/**
+ * @internal
+ * @brief Executes a hardware-abstracted I2C write transaction.
+ * * @param drv Pointer to the AS5048B driver instance.
+ * @param dev_id 7-bit I2C slave address of the target sensor.
+ * @param reg_addr Internal register address to write to.
+ * @param reg_data Pointer to the payload buffer.
+ * @param len Number of sequential bytes to write.
+ * @return I2C_Mode_t Status of the I2C transaction (IDLE_MODE on success).
+ */
 static I2C_Mode_t user_i2c_write(AS5048B_Driver_t *drv,
                                  uint8_t dev_id,
                                  uint8_t reg_addr,
@@ -25,6 +50,8 @@ static I2C_Mode_t user_i2c_write(AS5048B_Driver_t *drv,
 }
 
 /* Public API ---------------------------------------------------------------*/
+
+
 I2C_Mode_t AS5048B_Init(AS5048B_Driver_t *driver, I2C_port_t *I2Cport)
 {
     if (!driver || !I2Cport) return COMM_ERROR; // Null pointer verification
@@ -61,7 +88,7 @@ void find_dev_id_address(AS5048B_Driver_t *driver)
 I2C_Mode_t AS5048B_UpdateRegisters(AS5048B_Driver_t *driver, uint8_t num_encoder)
 {
     AS5048B_Sensor *sens = &driver->devices[num_encoder];
-    I2C_Mode_t st = IDLE_MODE; // Initialized to prevent undefined behavior
+    I2C_Mode_t st = IDLE_MODE;
 
     st = user_i2c_read(driver, sens->dev_id, REG_PROG_CTRL, 1);
     if (st != IDLE_MODE) return st; 
@@ -115,15 +142,6 @@ uint16_t AS5048B_GetAngle16bit(AS5048B_Driver_t *driver, uint8_t num_encoder)
 
     // 14-bit alignment: Shifts HIGH byte to bits [13:6], applies 0x3F mask to LOW byte bits [5:0]
     return (((uint16_t)sens->registers.angle_high) << 6) | (sens->registers.angle_low & 0x3F);
-}
-
-uint8_t AS5048B_GetAngle8bit(AS5048B_Driver_t *driver, uint8_t num_encoder)
-{
-    uint16_t raw = AS5048B_GetAngle16bit(driver, num_encoder);
-    
-    // Clamped nearest-integer rounding prevents 8-bit overflow at boundary raw=16383
-    uint16_t shifted = (raw + 32) >> 6;
-    return (uint8_t)(shifted > 255 ? 255 : shifted);
 }
 
 uint16_t AS5048B_GetMagnitude(AS5048B_Driver_t *driver, uint8_t num_encoder)

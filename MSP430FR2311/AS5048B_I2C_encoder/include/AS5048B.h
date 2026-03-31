@@ -1,11 +1,13 @@
-/*
+/**
+ * @file AS5048B.h
  * AS5048B Magnetic Position Sensor Driver
  *
- * Description:
- *   The host MCU (master) initiates all data transfers.
- *   The 7-bit slave device address depends on the state of
- *   OTP I²C register 21 (0x15) bits 0-4 plus 2 I²C address
- *   selection pins (3 and 4).
+ * @brief: The host MCU (master) initiates all data transfers.
+ * The 7-bit slave device address depends on the state of
+ * OTP I²C register 21 (0x15) bits 0-4 plus 2 I²C address
+ * selection pins (3 and 4).
+ * @author Adrián Silva Palafox
+ * @date may 31 2026
  */
 
 #ifndef AS5048B_H
@@ -76,99 +78,80 @@ typedef struct {
 /* Public API ----------------------------------------------------------------*/
 
 /**
- * @brief Initialize AS5048B driver
- * @param driver   Pointer to driver control struct
- * @param I2Cport  I2C handle
- * @return 
+ * @brief Initializes the AS5048B driver instance and binds the I2C hardware port.
+ * * @param driver Pointer to the AS5048B driver structure to be initialized.
+ * @param I2Cport Pointer to the initialized I2C hardware abstraction port.
+ * @return I2C_Mode_t COMM_ERROR if null pointers are passed; otherwise IDLE_MODE.
  */
 I2C_Mode_t AS5048B_Init(AS5048B_Driver_t *driver,
                                I2C_port_t *I2Cport);
 
 /**
- * @brief Add sensor to driver
- * @param driver      Pointer to driver struct
- * @param num_encoder Index in driver->devices[]
- * @param dev_id      7-bit I2C address
- * @return 
+ * @brief Registers a specific AS5048B sensor to the driver instance.
+ * * @param driver Pointer to the AS5048B driver instance.
+ * @param num_encoder Logical index assigned to the sensor instance (0 to AS5048B_MAX_DEVICES-1).
+ * @param dev_id 7-bit I2C hardware address of the sensor.
+ * @return I2C_Mode_t ACK_MODE if the device acknowledges the bus; otherwise COMM_ERROR or NACK_MODE.
+ * * @warning Fails if maximum device count is exceeded or hardware port is uninitialized.
  */
 I2C_Mode_t AS5048B_AddDevice(AS5048B_Driver_t *driver,
                                     uint8_t num_encoder,
                                     uint8_t dev_id);
 
 /**
- * @brief Scan I2C bus and populate driver->devices[].dev_id
- * @param driver   Pointer to driver struct
+ * @brief Scans the I2C bus to automatically detect and register AS5048B sensors.
+ * * Iterates through the 7-bit address space (0x01 to MAX_I2C_ADDR) and populates 
+ * the driver struct with acknowledging devices until AS5048B_MAX_DEVICES is reached.
+ * * @param driver Pointer to the AS5048B driver instance.
  */
 void find_dev_id_address(AS5048B_Driver_t *driver);
 
 /**
- * @brief Set mechanical zero position for given encoder
- * @param driver       Pointer to driver struct
- * @param num_encoder  Index in driver->devices[]
- * @return 0 on success
+ * @brief Calibrates the sensor by writing the current mechanical angle to the Zero Position registers.
+ * * Executes the sequential register clearing and writing procedure defined in the 
+ * AS5048B datasheet section 7.2.1. This does not permanently burn the OTP memory.
+ * * @param driver Pointer to the AS5048B driver instance.
+ * @param num_encoder Logical index of the target sensor.
+ * @return I2C_Mode_t IDLE_MODE upon successful calibration execution.
  */
 I2C_Mode_t AS5048B_SetZeroPosition(AS5048B_Driver_t *driver,
                             			  uint8_t num_encoder);
 
 /**
- * @brief Update register cache for given encoder
- * @param driver       Pointer to driver struct
- * @param num_encoder  Index in driver->devices[]
- * @return 0 on success
+ * @brief Sequentially updates all non-volatile and diagnostic registers from the sensor.
+ * * Consumes approximately 1.2ms of I2C bus time at 100kHz clock speed.
+ * * @param driver Pointer to the AS5048B driver instance.
+ * @param num_encoder Logical index of the target sensor.
+ * @return I2C_Mode_t IDLE_MODE upon successful sequential read; otherwise the specific error state.
  */
 I2C_Mode_t AS5048B_UpdateRegisters(AS5048B_Driver_t *driver,
 									      uint8_t num_encoder);
 
 /**
- * @brief Get angle in degrees for given encoder
- * @param driver       Pointer to driver struct
- * @param num_encoder  Index in driver->devices[]
- * @return Angle [0..65535)
+ * @brief Retrieves the raw 14-bit absolute angular position.
+ * * Reconstructs the 14-bit value from two sequential 8-bit registers, 
+ * enforcing a 0x3F mask on the low byte to drop diagnostic flags.
+ * * @param driver Pointer to the AS5048B driver instance.
+ * @param num_encoder Logical index of the target sensor.
+ * @return uint16_t Raw 14-bit angular value (0 to 16383). Returns 0 on I2C failure.
  */
 uint16_t AS5048B_GetAngle16bit(AS5048B_Driver_t *driver,
                              uint8_t num_encoder);
 
 /**
- * @brief Get angle in degrees for given encoder
- * @param driver       Pointer to driver struct
- * @param num_encoder  Index in driver->devices[]
- * @return Angle [0..254)
- */
-uint8_t AS5048B_GetAngle8bit(AS5048B_Driver_t *driver,
-                             uint8_t num_encoder);
-
-/**
- * @brief Get angle in degrees for given encoder
- * @param driver       Pointer to driver struct
- * @param num_encoder  Index in driver->devices[]
- * @return Angle [0..360)
- */
-float AS5048B_GetAngleDegrees(AS5048B_Driver_t *driver,
-                              uint8_t num_encoder);
-
-/**
- * @brief Get angle in radians for given encoder
- * @param driver       Pointer to driver struct
- * @param num_encoder  Index in driver->devices[]
- * @return Angle [0..2*PI)
- */
-float AS5048B_GetAngleRadians(AS5048B_Driver_t *driver,
-                              uint8_t num_encoder);
-
-/**
- * @brief Get signal magnitude for given encoder
- * @param driver       Pointer to driver struct
- * @param num_encoder  Index in driver->devices[]
- * @return Magnitude [0..4095]
+ * @brief Retrieves the 14-bit magnetic field magnitude.
+ * * @param driver Pointer to the AS5048B driver instance.
+ * @param num_encoder Logical index of the target sensor.
+ * @return uint16_t 14-bit magnitude value. High values indicate a strong magnetic field.
  */
 uint16_t AS5048B_GetMagnitude(AS5048B_Driver_t *driver,
                               uint8_t num_encoder);
 
 /**
- * @brief Check diagnostic flags for given encoder
- * @param driver       Pointer to driver struct
- * @param num_encoder  Index in driver->devices[]
- * @return 0 if OK, error code otherwise
+ * @brief Retrieves the 8-bit diagnostic register evaluating magnetic field strength parameters.
+ * * @param driver Pointer to the AS5048B driver instance.
+ * @param num_encoder Logical index of the target sensor.
+ * @return uint8_t Diagnostic flags (OCF, COF, COMP low/high).
  */
 uint8_t AS5048B_CheckDiagnostics(AS5048B_Driver_t *driver,
                                   uint8_t num_encoder);

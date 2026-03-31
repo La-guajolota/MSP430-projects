@@ -1,6 +1,6 @@
 #include "include/utils.h"
 
-void initClockTo16MHz() {
+void initClockTo16MHz(void) {
     // Configure one FRAM waitstate as required by the device datasheet for MCLK operation beyond 8MHz _before_ configuring the clock system.
     FRCTL0 = FRCTLPW | NWAITS_1;
 
