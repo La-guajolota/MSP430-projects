@@ -1,5 +1,0 @@
-"./src/AS5048B.obj"
-"./src/eUSCIB_I2C.obj"
-"./src/main.obj"
-"../lnk_msp430fr2311.cmd"
--llibc.a

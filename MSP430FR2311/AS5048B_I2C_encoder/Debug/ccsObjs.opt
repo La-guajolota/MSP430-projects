@@ -1,0 +1,7 @@
+"./src/AS5048B.obj"
+"./src/eUSCIA_uart.obj"
+"./src/eUSCIB_I2C.obj"
+"./src/main.obj"
+"./src/utils.obj"
+"../lnk_msp430fr2311.cmd"
+-llibc.a

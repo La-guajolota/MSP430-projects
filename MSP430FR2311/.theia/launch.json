@@ -20,12 +20,12 @@
             }
         },
         {
-            "name": "AS5048B_I2C_encoder.c",
+            "name": "AS5048B_I2C_encoder",
             "type": "ccs-debug",
             "request": "launch",
             "projectInfo": {
-                "name": "AS5048B_I2C_encoder.c",
-                "resourceId": "/AS5048B_I2C_encoder.c"
+                "name": "AS5048B_I2C_encoder",
+                "resourceId": "/AS5048B_I2C_encoder"
             }
         }
     ]
